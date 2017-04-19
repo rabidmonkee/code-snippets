@@ -1,8 +1,0 @@
-ViewBag.jsFile = Html.ViewContext.ViewBag.jsFile = "jquery.autotab.js";
-
-
-<script>
-    $(function () {
-        $('.input-phone1, .input-phone2, .input-phone3').autotab_magic().autotab_filter('numeric');
-    });
-</script>
