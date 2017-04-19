@@ -1,0 +1,42 @@
+=> set display: grid on parent container or display: inline-grid on element
+=> .element-a { grid-column-start: 1; grid-column-end: 1; grid-row-start: 2; grid-row-end: 2; }
+	=> shorthand .element-a { grid-column: 1 / 1; grid-row: 2 / 2 }
+		=> even shorter shorthand .element-a { grid-area: 1 / 2 / 1 / 2; }
+			-> (grid-row-start / grid-column-start / grid-row-end / grid-column-end)
+=> 	simple layout
+	->  (mobile narrow single column layout)
+		.wrapper {
+			display: grid;
+			grid-row-gap: 10px;
+			grid-template-areas:
+				"header"
+				"content"
+				"sidebar"
+				"footer";
+		}
+		(adding media query breakpoints)
+		@media (min-width: 550px;) {
+			.wrapper {
+				grid-column-gap: 2em;
+				grid-row-gap: 20px;
+				grid-template-columns: 2fr 4fr; (fractional)
+				grid-template-areas:
+					"header header"
+					"sidebar content"
+					"footer footer";
+			}
+		}
+=> 12 column grid
+	-> 	.wrapper {
+			display: grid;
+			grid-template-columns: repeat(12, [col] 1fr); (square brackets name the grid line)
+			grid-template-rows: repeat (5, [row] auto);
+			grid-column-gap: 1em;
+			grid-row-gap: 15px;
+		}
+=> 	fluid grid
+	-> 	.cards {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			grid-gap: 20px;
+		}

@@ -1,0 +1,7 @@
+<script>
+    $(document).keypress(function(event){
+        if(event.keyCode == 13){
+            $(":focus").click();   //OR $(":focus").trigger('click');
+        }
+    });
+</script>
