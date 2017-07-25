@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>2d CSS animation</title>
+	<script
+		src="https://code.jquery.com/jquery-3.2.1.min.js"
+		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+		crossorigin="anonymous">
+	</script>
+	<style type="text/css">
+		.sprite {
+		  height: 202px;
+		  width: 312px;
+		  display: inline-block;
+		  background-image: url(se_grocer_win_sprite_halfsize.jpg);
+		}
+
+		/* run x axis 1 second per frame, 0s delay, 5 times (5 rows) */
+		/* run y axis 1 second per step (5s total), 0s delay, 1 time (one set of rows) */
+		.trigger {
+		  animation: run-x 1s 0s 5 steps(26), run-y 5s 0s 1 steps(5);
+		}
+
+		/* keyframes for x axis */
+		@keyframes run-x {
+		  from {
+		    background-position-x: 0;
+		  }
+		  to {
+		    background-position-x: -8112px;
+		  }
+		}
+
+		/* keyframes for y axis */
+		@keyframes run-y {
+		  from {
+		    background-position-y: 0;
+		  }
+		  to {
+		    background-position-y: -1010px;
+		  }
+		}
+	</style>
+</head>
+<body>
+<section id="spinner-wrapper">
+	<div id="spinnerGame">
+		<div class="sprite"></div>
+		<button class="spin">CLICK</button>
+	</div>
+</section>
+<section id="result" style="display:none;">
+	<h1>YOU WIN</h1>
+</section>
+
+<script type="text/javascript">
+
+	// click button hides button and adds class to animation div
+	$('.spin').on('click', function(){
+		$('.spin').fadeOut("fast");
+		$('.sprite').addClass('trigger');
+		setTimeout(gameComplete, 4800); // show win/lose result after 4.8seconds regardless of animation state
+	})
+
+	// show win/lose result
+	function gameComplete() {
+        $("#spinner-wrapper").fadeOut(100, function () {
+            $("#result").fadeIn("fast");
+        })
+    }
+</script>
+</body>
+</html>
