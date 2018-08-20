@@ -1,0 +1,19 @@
+// SASS Mixin Grid
+	// first create the mixin
+	@mixin grid($cols, $mgn) {
+		float: left;
+		margin-right: $mgn;
+		margin-bottom: $mgn;
+		width: ((100% - (($cols -1) * $mgn)) / $cols );
+		&:nth-child(#{$cols}n) {
+			margin-right: 0;
+		}
+	}
+
+	// at the element where the grid lives include mixin
+	// with number of columns and margin percentage required
+	.gridList li {
+		@include grid(4, 2%)
+	}
+
+	// SASS documentation http://sass-lang.com/documentation/Sass/Script/Functions.html

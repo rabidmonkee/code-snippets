@@ -1,0 +1,107 @@
+<!-- Prizes HTML -->
+<div class="prizes-main" style="display: none;">
+	<div class="prizes-content">
+		<div class="prizes-close-btn">X</div>
+		<h2>WHAT YOU COULD WIN</h2>
+	</div>
+</div>
+
+<!-- Prizes JQuery -->
+<script>
+$(function () {
+	// show prizes on click of link
+	$('#footer-prizes').on('click', function () {
+		$('.prizes-main').show();
+	})
+
+	// hide prizes when click close button
+	$('.prizes-close-btn').on('click', function () {
+		$('.prizes-main').hide();
+	})
+
+	// close when clicked outside of wrap but prevent children
+	$(document).on('click', function (event) {
+		if ($(event.target).has('.prizes-content').length) {
+			$('.prizes-main').hide();
+		}
+	});
+
+    // POPUP prizes modal if query string exists : ?queryString=prizes
+	var queryString = GetParameterValues('queryString'),
+		 prizesNav = $("#footer-prizes");
+
+	if (queryString == "prizes") {
+		setTimeout(function () {
+			prizesNav.click();
+		}, 10);
+	}
+
+	// link in originating email must be %%BaseHref%%?queryString=prizes
+
+	// FUNCTION split query string from url
+	function GetParameterValues(param) {
+		var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+
+		for (var i = 0; i < url.length; i++) {
+			var urlparam = url[i].split('=');
+			if (urlparam[0] == param) {
+				return urlparam[1];
+			}
+		}
+	}
+});
+</script>
+
+<!-- Sass -->
+/*** Prizes Popup ***/
+.prizes-main {
+    width: 300px;
+    height: 155%;
+    position: absolute;
+    z-index: 2000;
+    background-color: rgba(0,0,0,.85);
+    margin: 0 auto;
+    padding-top: 25px;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    h2 {
+        font-size: 26px;
+        line-height: 26px;
+        padding: 0;
+        margin: 0;
+    }
+    p {
+        padding: 10px 0 15px;
+    }
+    .disclaimer {
+        font-size: 11px;
+    }
+}
+
+.prizes-close-btn {
+    background: url(../images/prizes-close-btn.png) top center no-repeat;
+    background-size: 100%;
+    width: 20px;
+    height: 20px;
+    text-indent: -9999px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.prizes-prize-item {
+    text-align: center;
+
+    .prize-image {
+        width: 200px;
+        margin: 0 auto;
+    }
+
+    h3 {
+        color: $header-font-color;
+        margin-bottom: 30px;
+    }
+
+}

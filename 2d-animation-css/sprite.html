@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>2d CSS animation</title>
+	<script
+		src="https://code.jquery.com/jquery-3.2.1.min.js"
+		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+		crossorigin="anonymous">
+	</script>
+	<style type="text/css">
+		body {
+			text-align: center;
+			font-family: sans-serif;
+		}
+		.sprite {
+		  height: 202px;
+		  width: 312px;
+		  display: inline-block;
+		  background-image: url(se_grocer_nw_sprite_halfsize.jpg);
+		}
+
+		/* run x axis 1 second per row, 0s delay, 5 times (5 rows) (25 frames per second in this case) */
+		/* run y axis 1 second per step, 0s delay, 1 time (one set of rows) */
+		/* y axis will always be a multiple of the x seconds times y rows = y seconds */
+		.trigger {
+		  animation: run-x 1s 0s 5 steps(25), run-y 5s 0s 1 steps(5);
+		}
+
+		/* keyframes for x axis */
+		@keyframes run-x {
+		  from {
+		    background-position-x: 0;
+		  }
+		  to {
+		    background-position-x: -7800px;
+		  }
+		}
+
+		/* keyframes for y axis */
+		@keyframes run-y {
+		  from {
+		    background-position-y: 0;
+		  }
+		  to {
+		    background-position-y: -1010px;
+		  }
+		}
+	</style>
+</head>
+<body>
+<section id="spinner-wrapper">
+	<div id="spinnerGame">
+		<div class="sprite"></div>
+		<br />
+		<button class="spin">KICK</button>
+	</div>
+</section>
+<section id="result" style="display:none;">
+	<h1>YOU SHANKED IT</h1>
+	<button class="reset">TRY AGAIN</button>
+</section>
+
+<script type="text/javascript">
+
+	// click button hides button and adds class to animation div
+	$('.spin').on('click', function(){
+		$('.spin').fadeOut("fast");
+		$('.sprite').addClass('trigger');
+		setTimeout(gameComplete, 4800); // show win/lose result after 4.8seconds regardless of animation state
+	})
+
+	// show win/lose result
+	function gameComplete() {
+        $("#spinner-wrapper").fadeOut(100, function () {
+            $("#result").fadeIn("fast");
+        })
+    }
+
+	// reset button
+	$('.reset').on('click', function (){
+		window.location.reload(true);
+	});
+</script>
+</body>
+</html>
+<!--
+	Code on live project:
+	<section id="spinner-wrapper">
+		<div id="spinnerGame">
+
+			@if (ViewBag.PageID == "win")
+			{
+			    <div class="win sprite"></div>
+			}
+			else
+			{
+			    <div class="nw sprite"></div>
+			}
+
+			<a class="spin btn btn-enter">KICK</a>
+
+		</div>
+	</section>
+	<script type="text/javascript">
+		// hides play button, starts animation
+		$('.spin').on('click', function(){
+			$('.spin').fadeOut("fast");
+			$('.win.sprite').addClass('trigger-win');
+			$('.nw.sprite').addClass('trigger-nw');
+			//hides animation after it completes
+			setTimeout(gameComplete, 7000);
+		})
+
+		// hides spinner game and shows reveal
+		function gameComplete() {
+			$("#spinner-wrapper").fadeOut(100, function () {
+				$("#result").fadeIn("fast");
+				$("#spinner-header").hide();
+				$('.spin-disclaimer').hide();
+			})
+		}
+	</script>
+
+	CSS FOR WIN:
+	.sprite {
+        height: 202px;
+        width: 312px;
+        display: inline-block;
+        display: inline-block;
+        background-image: url(../images/se_grocer_win_sprite_halfsize.jpg);
+        margin-top: 4px;
+    }
+
+    .trigger-win {
+        animation: run-win-x 1.5s 0s 5 steps(26), run-win-y 7.5s 0s 1 steps(5);
+    }
+
+    @keyframes run-win-x {
+        from {
+            background-position-x: 0;
+        }
+
+        to {
+            background-position-x: -8112px;
+        }
+    }
+
+    @keyframes run-win-y {
+        from {
+            background-position-y: 0;
+        }
+
+        to {
+            background-position-y: -1010px;
+        }
+    }
+
+	CSS FOR NW
+	.sprite {
+		height: 202px;
+		width: 312px;
+		display: inline-block;
+		background-image: url(../images/se_grocer_nw_sprite_halfsize.jpg);
+		margin-top: 4px;
+	}
+
+	.trigger-nw {
+		animation: run-nw-x 1.5s 0s 5 steps(25), run-nw-y 7.5s 0s 1 steps(5);
+	}
+
+	@keyframes run-nw-x {
+		from {
+			background-position-x: 0;
+		}
+
+		to {
+			background-position-x: -7800px;
+		}
+	}
+
+	@keyframes run-nw-y {
+		from {
+			background-position-y: 0;
+		}
+
+		to {
+			background-position-y: -1010px;
+		}
+	}
+-->
