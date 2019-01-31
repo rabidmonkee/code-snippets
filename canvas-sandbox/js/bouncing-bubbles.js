@@ -27,7 +27,7 @@ function Circle(x, y, dx, dy, radius, red, green, blue, alpha, lwidth, lred, lgr
 		c.strokeStyle = 'rgb(' + this.lred + ',' + this.lgreen + ',' + this.lblue + ')';
 		c.fillStyle = 'rgba(' + this.red + ',' + this.green + ',' + this.blue + ',' + this.alpha + ')';
 		c.lineWidth = this.lwidth;
-		c.stroke();
+		// c.stroke();
 		c.fill();
 	}
 

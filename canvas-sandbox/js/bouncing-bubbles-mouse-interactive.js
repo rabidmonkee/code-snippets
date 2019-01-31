@@ -95,7 +95,7 @@ function init() {
 
 	circleArray = [];
 
-	for (var i = 0; i <= 800; i++) {
+	for (var i = 0; i <= 400; i++) {
 
 		// randomizing variables
 		var radius = Math.random() * 15 + 1,
